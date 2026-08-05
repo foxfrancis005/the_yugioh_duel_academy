@@ -34,7 +34,77 @@ Una vez definido el alcance, el resto de la información se expresa mediante el 
 
 Cuando exista un término de abstracción, éste debe dejar claramente definido el comportamiento restante de la mecánica.
 
-#### Lista de resumen
+### Restricciones de invocación
+
+Las **restricciones de invocación** representan propiedades estructurales de un monstruo que definen **cómo puede ingresar al Campo**.
+
+A diferencia de las primitivas `(v)` y de los efectos continuos `(c)`, **no representan un efecto**, no poseen jerarquía de ejecución y **no forman parte de una cadena**. Su única función es definir los métodos de invocación permitidos o prohibidos para la carta.
+
+Su notación general es:
+
+- **(s)**: Restricción de invocación (*Summon Restriction*).
+
+#### Modos de invocación
+
+La primera línea declara los métodos de invocación permitidos o restringidos.
+
+Ejemplos:
+
+```text
+-(s): [Normal]
+```
+
+La carta SOLO puede ser Invocada de Modo Normal.
+
+```text
+-(s): [Special]
+```
+
+La carta SOLO puede ser Invocada de Modo Especial.
+
+#### Procedimiento de invocación
+
+Después del modo de invocación pueden declararse los requisitos propios de dicho procedimiento utilizando la misma sintaxis empleada por las primitivas.
+
+- **(Tipo de Invocación: costo)**: Acción que debe realizarse para efectuar ese tipo de invocación.
+- **[Tipo de Invocación: condición]**: Condición que debe cumplirse para efectuar ese tipo de invocación.
+
+Ejemplo:
+
+```text
+-(s): [Special]
+    -(Special Summon: Baraja de tu GY al Deck
+      3 monstruos, 3 Magias y 3 Trampas)
+```
+
+Ejemplo con condición:
+
+```text
+-(s): [Special]
+    -[Special Summon: Debes controlar exactamente 1 monstruo]
+```
+
+Ejemplo con costo y condición:
+
+```text
+-(s): [Special]
+    -(Special Summon: Destierra 2 monstruos de tu GY)
+    -[Special Summon: Debes controlar una carta de Campo]
+```
+
+#### Notas
+
+- Una restricción de invocación **no es un efecto**.
+- No posee jerarquía `(v)`.
+- No genera una cadena.
+- No puede expresarse mediante primitivas, ya que describe una propiedad inherente de la carta y no una ejecución.
+
+### Lista de resumen
+##### - Restricciones de invocación
+- **(s)**: [Tipo de invocación permitida], [...],...
+  - (tipo de invocación: costo)
+  - [tipo de invocación: condición]
+##### - Primitivas continuas:
 - **(cf)**: Efecto continuo sobre una carta en el juego. Este especifica que el efecto solo influye a la **carta fuente**
 - **(cp)**: Efecto continuo sobre ciertas cartas en el juego. Este especifica que el efecto influye a las **cartas del propietario, excepto a la carta fuente**
 - **(co)**: Efecto continuo sobre ciertas cartas en el juego. Este especifica que el efecto influye a solo a las **cartas del oponente**.
@@ -44,14 +114,14 @@ Cuando exista un término de abstracción, éste debe dejar claramente definido 
 
 **_Nota_**: La sintaxis no define la procedencia (deck, mano, zona de monstruos, cementerio, etc.). Esta debe definirse en la descripción de la misma primitiva
 
-### Jerarquías de ejecución:
+##### - Jerarquías de ejecución:
 - **(v1) Counter**: Máxima jerarquía de ejecución conocida. Permite responder a efectos de jerarquía inferior, incluidos los efectos Quick. Ejemplo principal: Counter Traps.
 - **(v2a) Quick effect manual**: Permite incorporar un efecto como respuesta durante una ventana válida de interacción. El jugador puede decidir su ejecución
 - **(v2b) Quick effect auto**: Permite incorporar un efecto como respuesta durante una ventana válida de interacción. Su ejecución es obligatoria
 - **(v3) Conditional auto**: Cuando sucede el evento correspondiente, el efecto debe incorporarse a la siguiente cadena válida. El jugador no decide si activarlo
 - **(v4) Conditional manual**: Cuando sucede el evento correspondiente, el efecto puede incorporarse a la siguiente cadena válida. El jugador puede decidir activarlo
 - **(v5) Manual**: El efecto no espera un evento disparador. El jugador lo activa voluntariamente durante una ventana legal
-### Sintaxis de requerimientos:
+##### - Sintaxis de requerimientos:
 - **(acción de costo)**: accion nominal que se debe hacer ANTES de ejecutar el efecto. Esto es a fondo perdido 
 - **[condicion a cumplir]**: accion pasada o presente que se debe cumplir para permitir la ejecucion del efecto
 - **{obligación despues del cumplimiento del efecto}**: accion que debe realizarse DESPUES de la resolucion satisfactoria del efecto
