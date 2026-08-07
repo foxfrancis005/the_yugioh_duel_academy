@@ -157,6 +157,43 @@ Ejemplo con costo y condición:
 
 **_Nota_**: Cuando no se especifique la dimensión de procedencia, por defecto es el area del propietario (su mano, su deck, su lado del campo). Y cualquier contexto faltante se agrega en la descripción de la primitiva
 
+## Definiciones de términos:
+- #### **Ventana válida de activación**: Es un estado del juego que permite activar uno o mas efectos de cierta jerarquía. 
+  ##### Características:
+  - Es el estado justo cuando las condiciones de un efecto en particular se cumplen
+  - Puede aparecer en un estado reglamentario del juego
+  - Puede aparecer entre cada efecto eslabon (chain link) del chain stack de una cadena. Al ser así, este efecto se agrega inmediatamente al siguiente eslabón
+  - Puede aparecer en la resolución del chain stack. Al ser así, se espera a que termine la resolución de esa cadene, y el efecto se ejecuta fuera de este. Si llegan a haber efectos simultaneos alternos (con misma jerarquía), estos efectos se acomodan en una nueva cadena
+- #### **Ciclo de vida de un efecto**: Es la serie de fases que contiene un efecto, desde su existencia inactiva en el juego, hasta su finalización. 
+  ##### Fases:
+  - **Latente**: El efecto está preparado, en espera de una ventana válida para su ejecución
+  - **Habilitado**: El efecto obtuvo la ventana válida de activación, y puede activarse en automático, o el jugador puede decidir activarlo
+  - **Declarado**: El efecto es declarado verbalmente, e inmediatamente se verifica el costo de acivación.
+    - ##### Protocolo de activación:
+      - *Verificación del costo de activación*: Si se cumple, se puede pasar a la siguiente fase. Si no, el efecto queda cancelado y vuelve a la fase Latente.
+  - **En espera**: El efecto entra en espera sin ejecutar el potencial de acción hasta que la cadena comience a ejecutar su fase de resolución (Esto en caso de que dicho efecto ya esté incorporado en el chain stack de una cadena)
+  - **Resolución**: Se comienzan a ejecutar las acciones del efecto, en caso de que la activación no se haya anulado (porque el estado del juego ya no permite su resolución), cancelado (en caso de que el costo de activación no se cumpla) o negado.
+  - **Finalizado**: El efecto se disuelve
+- #### Estructura de una cadena:
+  - 0. **Inexistente**
+  - 1. **Evento generador**: El efecto detonante.
+  - 2. **Apertura**:
+    *Nota*: Si el efecto de apertura se activa, y no existen efectos alternos que se activen en simultaneo con este efecto de apertura, la cadena se cierra y comienza a resolver este único efecto. De lo contrario, el evento generador se convierte en el primer eslabón de la cadena
+    - **/CL1/**: Efecto detonante
+      - [condición]: El estado del juego que permite activarlo
+      - **(costo)**: Acciones que se deben cumplir para la incorporación del efecto en un eslabon de la cadena. Como es el efecto detonante, se asume que este costo ya fue cumplido
+      - **-Ventana válida para el siguiente eslabón-**: Aquí, si una condición de algun efecto extra se cumple, se puede incorporar despues de este eslabón
+    - **/CL2/**: Segundo eslabón
+    ...(misma estructura)... 
+  - 3. **Cierre**: Cuando en la última vetana válida ya no existan efectos compatibles, o los jugadores ya no pueden responder con algo mas
+  - 4. **Resolución** (A la inversa):
+    - **/CLn/**: Comienzan a ejecutarse las acciones potenciales del último efecto de la cadena, considerando las reglas definidas en la fase de resolución del ciclo de vida del efecto
+    - **-Ventana válida para algún efecto-**: Si existe, este efecto generará otra cadena nueva, cuyo efecto será el efecto detonante.
+    - **/CLn-1/**: ......(misma estructura)...
+    - ...
+    - **/CL1/**: ...(misma estructura)...
+
+
 ## Materias
 
 ### - Rarities and economy
