@@ -44,53 +44,12 @@ Su notación general es:
 
 - **(s)**: Restricción de invocación (*Summon Restriction*).
 
-#### Modos de invocación
-
-La primera línea declara los métodos de invocación permitidos o restringidos.
-
-Ejemplos:
-
-```text
--(s): [Normal]
-```
-
-La carta SOLO puede ser Invocada de Modo Normal.
-
-```text
--(s): [Special]
-```
-
-La carta SOLO puede ser Invocada de Modo Especial.
-
 #### Procedimiento de invocación
 
 Después del modo de invocación pueden declararse los requisitos propios de dicho procedimiento utilizando la misma sintaxis empleada por las primitivas.
 
 - **(Tipo de Invocación: costo)**: Acción que debe realizarse para efectuar ese tipo de invocación.
 - **[Tipo de Invocación: condición]**: Condición que debe cumplirse para efectuar ese tipo de invocación.
-
-Ejemplo:
-
-```text
--(s): [Special]
-    -(Special Summon: Baraja de tu GY al Deck
-      3 monstruos, 3 Magias y 3 Trampas)
-```
-
-Ejemplo con condición:
-
-```text
--(s): [Special]
-    -[Special Summon: Debes controlar exactamente 1 monstruo]
-```
-
-Ejemplo con costo y condición:
-
-```text
--(s): [Special]
-    -(Special Summon: Destierra 2 monstruos de tu GY)
-    -[Special Summon: Debes controlar una carta de Campo]
-```
 
 #### Notas
 
@@ -122,6 +81,7 @@ Ejemplo con costo y condición:
 - **(v4) Conditional manual**: Cuando sucede el evento correspondiente, el efecto puede incorporarse a la siguiente cadena válida. El jugador puede decidir activarlo
 - **(v5) Manual**: El efecto no espera un evento disparador. El jugador lo activa voluntariamente durante una ventana legal
 ##### - Sintaxis de requerimientos:
+- **+Origen+**: ubicación que debe ocupar la carta fuente para que la primitiva tenga potencial de acción.
 - **(acción de costo)**: accion nominal que se debe hacer ANTES de ejecutar el efecto. Esto es a fondo perdido 
 - **[condicion a cumplir]**: accion pasada o presente que se debe cumplir para permitir la ejecucion del efecto
 - **{obligación despues del cumplimiento del efecto}**: accion que debe realizarse DESPUES de la resolucion satisfactoria del efecto
@@ -155,51 +115,413 @@ Ejemplo con costo y condición:
 | Incrementador       | Incrementa una propiedad numérica del objeto de juego (Nivel, ATK, etc) |
 | Reductor            | Disminuye una propiedad numérica del objeto de juego (Nivel, ATK, etc)  |
 
-**_Nota_**: Cuando no se especifique la dimensión de procedencia, por defecto es el area del propietario (su mano, su deck, su lado del campo). Y cualquier contexto faltante se agrega en la descripción de la primitiva
+### Origen de las primitivas
+
+El **origen** representa la ubicación que debe ocupar la **carta fuente** para que una primitiva tenga potencial de acción.
+
+Su notación general es:
+
+* **+Origen+**: Zona del juego desde la cual la primitiva posee potencial de acción.
+
+#### Reglas de origen
+
+* El origen es **obligatorio en toda primitiva**, incluso cuando la ubicación de la carta fuente resulte evidente por su tipo o comportamiento.
+* Debe declararse inmediatamente después de la descripción nominal de la primitiva y antes de costos, condiciones, obligaciones, tiempos de vida, frecuencias de activación o restricciones alternas.
+* El origen es una **propiedad estructural de la primitiva** y no una `[condición]`.
+* El origen pertenece individualmente a cada primitiva y no a la carta completa. Una misma carta puede contener primitivas con diferentes orígenes.
+* El origen describe exclusivamente la ubicación de la **carta fuente**. No representa la ubicación de cartas utilizadas como costo, objetivos, recursos, cartas afectadas ni destinos de una acción.
+* La existencia de una carta fuente en el origen correspondiente determina que la primitiva posea potencial de acción. Sus demás requisitos determinan posteriormente si dicho potencial puede ser habilitado o ejecutado.
+
+#### Orígenes generales
+
+Las zonas externas al Campo se declaran directamente mediante su nombre correspondiente:
+
+* **+Mano+**
+* **+Deck+**
+* **+GY+**
+* **+Extra Deck+**
+* **+Desterrado+**
+
+Cuando una primitiva tiene como origen el Campo puede utilizarse:
+
+* **+Campo+**
+
+`+Campo+` representa por defecto la zona nominal del Campo correspondiente a la naturaleza de la carta fuente:
+
+* Para una carta de Monstruo, `+Campo+` representa su ubicación nominal como monstruo.
+* Para una carta de Magia o Trampa, `+Campo+` representa su ubicación nominal como Magia o Trampa.
+
+Cuando la carta fuente deba encontrarse en una zona del Campo distinta de su ubicación nominal, el origen debe especificar explícitamente dicha zona.
+
+Entre estas ubicaciones pueden declararse:
+
+* **+Monster Zone+**
+* **+Zona de Magias/Trampas+**
+* **+Zona Péndulo+**
+* **+Field Zone+**
+
+La especificación explícita de una zona prevalece sobre cualquier ubicación que pudiera inferirse del tipo, naturaleza o comportamiento nominal de la carta fuente.
+
+#### Propiedad del origen
+
+Por defecto, todo origen se refiere a la zona correspondiente del **propietario de la carta fuente**, salvo que la propia mecánica establezca expresamente una relación diferente.
+
+El origen no determina quién controla actualmente la carta, quién ejecuta una acción ni qué jugador resulta afectado por la primitiva. Su función se limita a establecer la ubicación requerida de la carta fuente.
+
+### Términos formales de referencia
+
+Las primitivas utilizan un conjunto de términos formales para establecer de manera inequívoca la relación entre la carta que contiene una primitiva, su propietario y el oponente.
+
+Estos términos deben conservar su significado independientemente del jugador que lea, analice o ejecute la primitiva.
+
+#### Carta fuente
+
+**Carta fuente**: Carta que contiene la primitiva que se está analizando.
+
+La carta fuente constituye el punto de referencia central para interpretar las relaciones de propiedad, oposición y ubicación expresadas dentro de la primitiva.
+
+Cuando una expresión mencione explícitamente a la **carta fuente**, únicamente puede referirse a dicha carta y no al resto de cartas pertenecientes a su propietario.
+
+#### Carta del propietario
+
+**Carta del propietario**: Carta perteneciente al mismo jugador propietario de la carta fuente.
+
+El término establece una relación de propiedad respecto de la carta fuente y no respecto del jugador que esté leyendo o analizando la primitiva.
+
+Cuando el contexto no excluya explícitamente a la carta fuente, ésta puede formar parte del conjunto de cartas del propietario.
+
+#### Tu carta
+
+**Tu carta**: Sinónimo sintáctico de **carta del propietario**.
+
+Los términos **tu**, **tus** y sus construcciones derivadas se interpretan siempre desde la perspectiva del propietario de la carta fuente.
+
+Por lo tanto, el pronombre posesivo no cambia de significado dependiendo del lector, analista o jugador que consulte la primitiva.
+
+#### Propietario
+
+**Propietario**: Jugador al que pertenece la carta fuente.
+
+El propietario constituye el punto de referencia utilizado para interpretar expresiones relativas como **tu**, **tus**, **carta del propietario**, **tu Campo**, **tu Mano**, **tu Deck**, **tu GY** y demás relaciones equivalentes.
+
+#### Oponente
+
+**Oponente**: Jugador contrario al propietario de la carta fuente.
+
+Toda expresión que haga referencia al **oponente**, **tu oponente**, **cartas del oponente**, **Campo del oponente** o cualquier construcción equivalente se interpreta desde la perspectiva del propietario de la carta fuente.
+
+### Regla general de referencia
+
+La **carta fuente** constituye el centro del sistema de referencia de una primitiva.
+
+A partir de ella se determinan formalmente las siguientes relaciones:
+
+* **Carta fuente**: la propia carta que contiene la primitiva.
+* **Propietario**: jugador al que pertenece la carta fuente.
+* **Tu / tus**: relación de pertenencia con el propietario de la carta fuente.
+* **Carta del propietario**: carta perteneciente al propietario de la carta fuente.
+* **Oponente**: jugador contrario al propietario de la carta fuente.
+* **Carta del oponente**: carta perteneciente al jugador contrario al propietario de la carta fuente.
+
+Estas relaciones permanecen constantes durante la interpretación de la primitiva y no dependen de la perspectiva del lector.
+
+### Ciclo de vida de un efecto y Estructura de la Cadena
+
+#### Ciclo de vida de un efecto
+Todo efecto posee un ciclo de vida bien definido que describe los estados por los que transita desde que existe en una carta hasta que concluye completamente su ejecución:
+
+1. **Latente**: El efecto existe como parte de la carta, pero todavía no puede incorporarse al juego. Permanece "cargado" esperando el estado del juego que permita su activación.
+2. **Habilitado**: El efecto entra en una **ventana válida**. El estado actual permite su incorporación, pero aún no ha sido activado. Dependiendo de su jerarquía, puede requerir una decisión del jugador o incorporarse automáticamente.
+3. **Activado / Declarado**: El efecto cambia oficialmente de estado. La activación ha sido declarada y se convierte en una ejecución pendiente. Aún no se ha resuelto ninguna acción.
+4. **Incorporado al Chain Stack**: El efecto pasa a formar parte del Chain Stack. Permanece en espera mientras la cadena continúa construyéndose o hasta que llegue el momento de resolverla.
+5. **Resolución**: El efecto comienza a ejecutarse. Se depuran secuencialmente todas las acciones que lo componen, verificando que sus condiciones de ejecución continúen siendo válidas.
+6. **Finalizado**: La resolución ha concluido. El efecto abandona el Chain Stack y deja de existir como ejecución activa (aunque la carta pueda conservar el mismo efecto en estado latente para futuras oportunidades).
+
+#### Estructura de la Cadena
+La cadena (Chain) es la estructura integral que administra los efectos **durante su paso por el Chain Stack** (fases de Incorporación y Resolución), organizando el flujo de las interacciones. Consta de las siguientes fases fundamentales:
+
+1. **Evento generador**: La acción del juego o activación previa que altera el estado actual del juego. Es el evento disparador que da origen a la necesidad de construir la cadena.
+2. **Apertura**: El efecto inicial (o efectos simultáneos) que se activa en respuesta directa (o por voluntad libre) al evento generador. Forma el eslabón 1 de la cadena (Chain Link 1). Al abrirse, valida sus costos/condiciones y abre la primera ventana de interacción.
+3. **Chain stack**: La fase de construcción de la cadena donde los jugadores incorporan secuencialmente efectos adicionales (Chain Link 2, 3, etc.) en respuesta a los eslabones anteriores. Cada eslabón evalúa sus condiciones y costos antes de adherirse, y abre su propia ventana de interacción válida para la jerarquía de los efectos que le sigan.
+4. **Cierre**: Ocurre cuando la ventana de interacción queda vacía o los jugadores deciden no agregar más efectos al chain stack.
+5. **Resolución**: Los efectos incorporados se ejecutan en orden inverso a su activación (LIFO: Last In, First Out). Cada eslabón resuelve y determina si su ejecución fue exitosa o si fue alterada/negada basándose en las resoluciones de eslabones previos.
+6. **Finalización**: Concluye el ciclo de vida de la cadena. El nuevo estado del juego, tras todas las resoluciones, puede convertirse instantáneamente en el **Evento generador** de una nueva cadena.
+
+#### Plantilla (Fórmula) de la Cadena
+
+```markdown
+## Evento generador:
+- (Acción del juego, resolución previa, o estado del tablero)
+
+## Apertura:
+- /CL1/: (v[x][n]) [Efecto o acción inicial]
+  - [condición]: Condición para que se active este efecto (si aplica)
+  - (costo): Acción nominal a fondo perdido (si aplica)
+  - -ventana válida para-: [Lista de jerarquías o efectos disponibles en respuesta]
+
+## Chain stack:
+- /CL2/: (v[x][n]) [Efecto de respuesta al CL1]
+  - [condición]: Condición para que se active este efecto (si aplica)
+  - (costo): Acción nominal a fondo perdido (si aplica)
+  - -ventana válida para-: [Lista de jerarquías o efectos disponibles en respuesta al CL2]
+- /CL[N]/: ...
+**_Nota_**: La sintaxis no define la procedencia (deck, mano, zona de monstruos, cementerio, etc.). Esta debe definirse en la descripción de la misma primitiva
+
+##### - Jerarquías de ejecución:
+- **(v1) Counter**: Máxima jerarquía de ejecución conocida. Permite responder a efectos de jerarquía inferior, incluidos los efectos Quick. Ejemplo principal: Counter Traps.
+- **(v2a) Quick effect manual**: Permite incorporar un efecto como respuesta durante una ventana válida de interacción. El jugador puede decidir su ejecución
+- **(v2b) Quick effect auto**: Permite incorporar un efecto como respuesta durante una ventana válida de interacción. Su ejecución es obligatoria
+- **(v3) Conditional auto**: Cuando sucede el evento correspondiente, el efecto debe incorporarse a la siguiente cadena válida. El jugador no decide si activarlo
+- **(v4) Conditional manual**: Cuando sucede el evento correspondiente, el efecto puede incorporarse a la siguiente cadena válida. El jugador puede decidir activarlo
+- **(v5) Manual**: El efecto no espera un evento disparador. El jugador lo activa voluntariamente durante una ventana legal
+##### - Sintaxis de requerimientos:
+- **+Origen+**: ubicación que debe ocupar la carta fuente para que la primitiva tenga potencial de acción.
+- **(acción de costo)**: accion nominal que se debe hacer ANTES de ejecutar el efecto. Esto es a fondo perdido 
+- **[condicion a cumplir]**: accion pasada o presente que se debe cumplir para permitir la ejecucion del efecto
+- **{obligación despues del cumplimiento del efecto}**: accion que debe realizarse DESPUES de la resolucion satisfactoria del efecto
+- **~tiempo de vida~**: Tiempo en el que un efecto de modificación de carta o comportamiento se aplica. Este se expresa en el texto de la carta o se asume sobre la mecánica 
+- **•frecuencia de activación•**: Intervalo explicito de cuantas veces se puede aplicar el efecto. Este se expresa en el texto de la carta 
+- **«restricción alterna»**: modificacion alternativa posterior del comportamiento del juego actual
+
+### Términos de abstracción:
+| Término             | Mecánica cerrada                                                        |
+| ------------------- | ----------------------------------------------------------------------- |
+| Buscador            | Deck → Mano                                                             |
+| Enterrador          | Deck → GY                                                               |
+| Revividor           | GY → Campo (respetando condiciones de invocación)                       |
+| Grave-Summoner      | GY → Campo (ignorando o sin requerir condiciones de invocación previas) |
+| Extra-Summoner      | Extra Deck → Campo                                                      |
+| Recuperador         | GY → Mano                                                               |
+| Reciclador          | GY → Deck                                                               |
+| Reciclador          | GY → Deck                                                               |
+| Reciclador de Ban   | Desterrado → Deck                                                       |
+| Desterrador         | Cualquier zona → Desterrado                                             |
+| Rebotador           | Campo → Mano                                                            |
+| Retornador          | Campo → Deck                                                            |
+| Destructor          | Campo → GY mediante destrucción                                         |
+| Tributador          | Tributa tus monstruos                                                   |
+| Tributador ofensivo | Tributa monstruos del oponente                                          |
+| Tributador global   | Tributa monstruos de ambos campos                                       |
+| Protector           | Otorga protección a otra carta                                          |
+| Inmunidad parcial   | No afectada por efectos (que no impliquen target)                       |
+| Inmunidad de target | No puede ser seleccionada como objetivo                                 |
+| Inmunidad total     | No afectada por efectos y no puede ser objetivo                         |
+| Convertidor         | Modifica una propiedad del objeto de juego                              |
+| Incrementador       | Incrementa una propiedad numérica del objeto de juego (Nivel, ATK, etc) |
+| Reductor            | Disminuye una propiedad numérica del objeto de juego (Nivel, ATK, etc)  |
+
+### Origen de las primitivas
+
+El **origen** representa la ubicación que debe ocupar la **carta fuente** para que una primitiva tenga potencial de acción.
+
+Su notación general es:
+
+* **+Origen+**: Zona del juego desde la cual la primitiva posee potencial de acción.
+
+#### Reglas de origen
+
+* El origen es **obligatorio en toda primitiva**, incluso cuando la ubicación de la carta fuente resulte evidente por su tipo o comportamiento.
+* Debe declararse inmediatamente después de la descripción nominal de la primitiva y antes de costos, condiciones, obligaciones, tiempos de vida, frecuencias de activación o restricciones alternas.
+* El origen es una **propiedad estructural de la primitiva** y no una `[condición]`.
+* El origen pertenece individualmente a cada primitiva y no a la carta completa. Una misma carta puede contener primitivas con diferentes orígenes.
+* El origen describe exclusivamente la ubicación de la **carta fuente**. No representa la ubicación de cartas utilizadas como costo, objetivos, recursos, cartas afectadas ni destinos de una acción.
+* La existencia de una carta fuente en el origen correspondiente determina que la primitiva posea potencial de acción. Sus demás requisitos determinan posteriormente si dicho potencial puede ser habilitado o ejecutado.
+
+#### Orígenes generales
+
+Las zonas externas al Campo se declaran directamente mediante su nombre correspondiente:
+
+* **+Mano+**
+* **+Deck+**
+* **+GY+**
+* **+Extra Deck+**
+* **+Desterrado+**
+
+Cuando una primitiva tiene como origen el Campo puede utilizarse:
+
+* **+Campo+**
+
+`+Campo+` representa por defecto la zona nominal del Campo correspondiente a la naturaleza de la carta fuente:
+
+* Para una carta de Monstruo, `+Campo+` representa su ubicación nominal como monstruo.
+* Para una carta de Magia o Trampa, `+Campo+` representa su ubicación nominal como Magia o Trampa.
+
+Cuando la carta fuente deba encontrarse en una zona del Campo distinta de su ubicación nominal, el origen debe especificar explícitamente dicha zona.
+
+Entre estas ubicaciones pueden declararse:
+
+* **+Monster Zone+**
+* **+Zona de Magias/Trampas+**
+* **+Zona Péndulo+**
+* **+Field Zone+**
+
+La especificación explícita de una zona prevalece sobre cualquier ubicación que pudiera inferirse del tipo, naturaleza o comportamiento nominal de la carta fuente.
+
+#### Propiedad del origen
+
+Por defecto, todo origen se refiere a la zona correspondiente del **propietario de la carta fuente**, salvo que la propia mecánica establezca expresamente una relación diferente.
+
+El origen no determina quién controla actualmente la carta, quién ejecuta una acción ni qué jugador resulta afectado por la primitiva. Su función se limita a establecer la ubicación requerida de la carta fuente.
+
+### Términos formales de referencia
+
+Las primitivas utilizan un conjunto de términos formales para establecer de manera inequívoca la relación entre la carta que contiene una primitiva, su propietario y el oponente.
+
+Estos términos deben conservar su significado independientemente del jugador que lea, analice o ejecute la primitiva.
+
+#### Carta fuente
+
+**Carta fuente**: Carta que contiene la primitiva que se está analizando.
+
+La carta fuente constituye el punto de referencia central para interpretar las relaciones de propiedad, oposición y ubicación expresadas dentro de la primitiva.
+
+Cuando una expresión mencione explícitamente a la **carta fuente**, únicamente puede referirse a dicha carta y no al resto de cartas pertenecientes a su propietario.
+
+#### Carta del propietario
+
+**Carta del propietario**: Carta perteneciente al mismo jugador propietario de la carta fuente.
+
+El término establece una relación de propiedad respecto de la carta fuente y no respecto del jugador que esté leyendo o analizando la primitiva.
+
+Cuando el contexto no excluya explícitamente a la carta fuente, ésta puede formar parte del conjunto de cartas del propietario.
+
+#### Tu carta
+
+**Tu carta**: Sinónimo sintáctico de **carta del propietario**.
+
+Los términos **tu**, **tus** y sus construcciones derivadas se interpretan siempre desde la perspectiva del propietario de la carta fuente.
+
+Por lo tanto, el pronombre posesivo no cambia de significado dependiendo del lector, analista o jugador que consulte la primitiva.
+
+#### Propietario
+
+**Propietario**: Jugador al que pertenece la carta fuente.
+
+El propietario constituye el punto de referencia utilizado para interpretar expresiones relativas como **tu**, **tus**, **carta del propietario**, **tu Campo**, **tu Mano**, **tu Deck**, **tu GY** y demás relaciones equivalentes.
+
+#### Oponente
+
+**Oponente**: Jugador contrario al propietario de la carta fuente.
+
+Toda expresión que haga referencia al **oponente**, **tu oponente**, **cartas del oponente**, **Campo del oponente** o cualquier construcción equivalente se interpreta desde la perspectiva del propietario de la carta fuente.
+
+### Regla general de referencia
+
+La **carta fuente** constituye el centro del sistema de referencia de una primitiva.
+
+A partir de ella se determinan formalmente las siguientes relaciones:
+
+* **Carta fuente**: la propia carta que contiene la primitiva.
+* **Propietario**: jugador al que pertenece la carta fuente.
+* **Tu / tus**: relación de pertenencia con el propietario de la carta fuente.
+* **Carta del propietario**: carta perteneciente al propietario de la carta fuente.
+* **Oponente**: jugador contrario al propietario de la carta fuente.
+* **Carta del oponente**: carta perteneciente al jugador contrario al propietario de la carta fuente.
+
+Estas relaciones permanecen constantes durante la interpretación de la primitiva y no dependen de la perspectiva del lector.
+
+### Ciclo de vida de un efecto y Estructura de la Cadena
+
+#### Ciclo de vida de un efecto
+Todo efecto posee un ciclo de vida bien definido que describe los estados por los que transita desde que existe en una carta hasta que concluye completamente su ejecución:
+
+1. **Latente**: El efecto existe como parte de la carta, pero todavía no puede incorporarse al juego. Permanece "cargado" esperando el estado del juego que permita su activación.
+2. **Habilitado**: El efecto entra en una **ventana válida**. El estado actual permite su incorporación, pero aún no ha sido activado. Dependiendo de su jerarquía, puede requerir una decisión del jugador o incorporarse automáticamente.
+3. **Activado / Declarado**: El efecto cambia oficialmente de estado. La activación ha sido declarada y se convierte en una ejecución pendiente. Aún no se ha resuelto ninguna acción.
+4. **Incorporado al Chain Stack**: El efecto pasa a formar parte del Chain Stack. Permanece en espera mientras la cadena continúa construyéndose o hasta que llegue el momento de resolverla.
+5. **Resolución**: El efecto comienza a ejecutarse. Se depuran secuencialmente todas las acciones que lo componen, verificando que sus condiciones de ejecución continúen siendo válidas.
+6. **Finalizado**: La resolución ha concluido. El efecto abandona el Chain Stack y deja de existir como ejecución activa (aunque la carta pueda conservar el mismo efecto en estado latente para futuras oportunidades).
+
+#### Estructura de la Cadena
+La cadena (Chain) es la estructura integral que administra los efectos **durante su paso por el Chain Stack** (fases de Incorporación y Resolución), organizando el flujo de las interacciones. Consta de las siguientes fases fundamentales:
+
+1. **Evento generador**: La acción del juego o activación previa que altera el estado actual del juego. Es el evento disparador que da origen a la necesidad de construir la cadena.
+2. **Apertura**: El efecto inicial (o efectos simultáneos) que se activa en respuesta directa (o por voluntad libre) al evento generador. Forma el eslabón 1 de la cadena (Chain Link 1). Al abrirse, valida sus costos/condiciones y abre la primera ventana de interacción.
+3. **Chain stack**: La fase de construcción de la cadena donde los jugadores incorporan secuencialmente efectos adicionales (Chain Link 2, 3, etc.) en respuesta a los eslabones anteriores. Cada eslabón evalúa sus condiciones y costos antes de adherirse, y abre su propia ventana de interacción válida para la jerarquía de los efectos que le sigan.
+4. **Cierre**: Ocurre cuando la ventana de interacción queda vacía o los jugadores deciden no agregar más efectos al chain stack.
+5. **Resolución**: Los efectos incorporados se ejecutan en orden inverso a su activación (LIFO: Last In, First Out). Cada eslabón resuelve y determina si su ejecución fue exitosa o si fue alterada/negada basándose en las resoluciones de eslabones previos.
+6. **Finalización**: Concluye el ciclo de vida de la cadena. El nuevo estado del juego, tras todas las resoluciones, puede convertirse instantáneamente en el **Evento generador** de una nueva cadena.
+
+#### Plantilla (Fórmula) de la Cadena
+
+```markdown
+## Evento generador:
+- (Acción del juego, resolución previa, o estado del tablero)
+
+## Apertura:
+- /CL1/: (v[x][n]) [Efecto o acción inicial]
+  - [condición]: Condición para que se active este efecto (si aplica)
+  - (costo): Acción nominal a fondo perdido (si aplica)
+  - -ventana válida para-: [Lista de jerarquías o efectos disponibles en respuesta]
+
+## Chain stack:
+- /CL2/: (v[x][n]) [Efecto de respuesta al CL1]
+  - [condición]: Condición para que se active este efecto (si aplica)
+  - (costo): Acción nominal a fondo perdido (si aplica)
+  - -ventana válida para-: [Lista de jerarquías o efectos disponibles en respuesta al CL2]
+- /CL[N]/: ...
+- /CL3/: (v[x][n]) [Efecto de respuesta a cualquier eslabón previo o estado actual]
+  - [condición]: Condición para que se active este efecto (si aplica)
+  - (costo): Acción nominal a fondo perdido (si aplica)
+  - -ventana válida para-: [Lista de jerarquías o efectos disponibles en respuesta a cualquier otro eslabón previo o estado actual]
+
+## Cierre: 
+- Fin de la incorporación de efectos
+
+## Resolución:
+- /CL[N]/: [Descripción de la resolución del efecto N (Success/Failed)]
+- /CL2/: [Descripción de la resolución del efecto 2 (Success/Failed)]
+- /CL1/: [Descripción de la resolución del efecto 1 (Success/Failed)]
+
+## Finalización
+- Fin de la cadena actual
+```
 
 ## Materias
 
 ### - Rarities and economy
-#### Definiendo presupuestos
-- Dos colecciones diferentes
-  - Gasto de aprendizaje: dinero invertido para comprender el juego, descubrir arquetipos y desarrollar habilidad.
-  - Gasto competitivo: dinero invertido para transformar ese conocimiento en resultados dentro del ecosistema físico.
-#### Perfil económico:
-- Presupuesto mensual: ~$1500
-- Carta virtual, carta real o ambas: Ambas
-- **El presupuesto siempre se calcula en cartas físicas a lo largo de todo el curso**
-##### Temas próximos:
-- Costo sobre demanda
-- Reprints
-- Ventas y permutas 
+- Definición de presupuestos
+- Gasto de aprendizaje vs gasto competitivo
+- Presupuesto mensual asignado
+- Planes de gasto
+- Metas como duelista
+
 ### - Lore & Narrative
-- Universos compartidos
-- Cronología del lore
-- Personajes
-- Facciones
-- Evolución narrativa
-### - Pilotage
-- Perfiles de jugador
-- Sidecking
-- Brick balance
-### - Metagame and staples
-- Staple actual
-- Historico competitivo
-- Tiers
+- Descubrimiento y conexión emocional con el juego
+- Significado narrativo de los arquetipos
+- Diferencia entre "cartas" y "personajes"
+
 ### - Mechanics
-#### Definición del lenguaje de análisis
-- Corrección de definiciones
-- Anatomía de una primitiva
-- Comprensión estratégica
-##### Temas próximos:
-- Amplificación del arquetipo
-- Como evaluar el staple en un arquetipo
-- Desglose de primitivas
-- Anatomía de combos
-- Flushes
-- Floodgates
+- Introducción a Mechanics
+- Análisis de velocidades y nomenclatura
+- Sintaxis de primitivas
+- Desglose práctico de cartas en primitivas (Ej: Rikka)
+- Jerarquías, costos y condiciones
+- Dimensiones de procedencia y destino
+- Regla de omisión nominal
+- Diferenciación entre jerarquía de decisión y Spell Speed
+- Ciclo de vida de un efecto (Latente a Finalizado)
+- Administración de la cadena (Chain Stack)
+- Etiqueta estructural de +Origen+
+- Términos formales de referencia (Carta fuente, Propietario, Oponente)
+
 ### - Discovery
-#### Arquetipos analizados:
-- (pendiente)
+- El método Sandbox
+- Extracción de primitivas
+- Descomposición de decks insignia (Madolche)
+- Exploración de decks desconocidos (The Weather Painter)
+
+### - Pilotage
+- Introducción al entorno competitivo
+- Toma de decisiones
+- Secuenciación correcta
+- Aprovechamiento de recursos
+- Ejecución de combos
+
+### - Metagame and staples
+- Evolución histórica del juego
+- Análisis del Powercreep
+- Herramientas de análisis
 
 ## Notas
+- El archivo `Sistema de aprendizaje para Yu-Gi-Oh!.md` es el recurso didáctico del director, para administrar y guiar cualquier detalle que surja a lo largo del desarrollo docente de toda la academia. Aquí se plasman las decisiones a tomar durante el desarrollo del curso completo.
