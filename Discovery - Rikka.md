@@ -14,40 +14,47 @@
     - [no debes controlar monstruos o todos deben ser plantas]
     - •una vez por turno hotp•
 
-- ### Primula (4/plant/effect/800/1800):
-  - (v4): Auto-summon
-    - +mano+
-    - [si un monstruo que controlas es tributado]
-    - •una vez por turno hotp•
-  - (v5): Incrementador de nivel por 2 a hasta 2 Plantas
-    - +campo+
-    - (targetea hasta 2 plantas que controlas)
-    - [debe estar boca arriba]
-    - ~hasta el final del turno~
-    - •una vez por turno hotp•
+- #### Petalo: 1
+  - (v4): **Buscador** de 1 monstruo Rikka de tu Deck a tu Mano o Enterrador de 1 monstruo Rikka de tu Deck a tu GY
+    - [Debe estar en campo face-up]
+    - [Debes estar en tu main fase 1]
+    - [El monstruo a buscar no debe ser Rikka petalo]
+    - •1 vez por turno (HOPT)•
+    - «Solo puedes hacer special de plantas por el resto del turno»
+  - (v4): **Se autorrevive** esta carta desde tu GY a tu Campo
+    - [Solo en End Phase del oponente]
+    - [Debe estar en GY]
+    - [No debes controlar monstruos o todos deben ser plantas]
+    - •1 vez por turno (HOPT)•
 
-- ### Cyclamen (4/plant/effect/1800/800):
-  - (v5): Reductor de nivel por 2 a hasta 2 Plantas
-    - +mano+
-    - +campo+
-    - (tributar esta carta)
-    - (targetea hasta 2 plantas que controlas)
+- #### Primula: 4
+  - (v4): **Auto-summon** de esta carta desde tu Mano a tu Campo en defensa
+    - [Si un monstruo que controlas es tributado]
+    - •1 vez por turno (HOPT)•
+  - (v5): **Incrementador de 2 niveles** a hasta 2 Plantas en tu Campo
+    - (Targetea hasta 2 plantas que controlas)
+    - [Debe estar en campo face-up]
+    - ~El efecto dura hasta el final del turno~
+    - •1 vez por turno (HOPT)•
+
+- #### Cyclamen: 4
+  - (v5): **Reductor de niveles** de hasta dos Plantas en tu Campo por 2
+    - (Tributa esta carta desde mano o campo face-up)
+    - (Targetea hasta 2 plantas que controlas)
     - [al menos una planta en tu campo]
-    - ~hasta el final del turno~
-    - •una vez por turno hotp•
-  - (v4): Revividor de esta carta
-    - +cementerio+
-    - [si esta carta fue tributada y enviada al GY este turno]
-    - [durante la End Phase]
-    - «se destierra cuando deja el campo»
-    - •una vez por turno hotp•
+    - ~Hasta el final del turno~
+    - •1 vez por turno (HOPT)•
+  - (v4): **Se autorrevive** esta carta desde tu GY a tu Campo
+    - [Si está en GY por ser tributada y enviada ahí este turno]
+    - [Durante la End Phase]
+    - •1 vez por turno (HOPT)•
+    - «Se destierra cuando deja el campo»
 
-- ### Princesa (4/plant/effect/0/0):
-  - (v4): Auto summon desde la mano
-    - +mano+
-    - [es la main phase]
-    - «solo puedes hacer special unicamente de plantas mientras la carta fuente este boca arriba en la monster zonre»
-    - •una vez por turno hotp•
+- #### Princesa: 4
+  - (v5): **Auto-summon** de esta carta desde tu Mano a tu Campo
+    - [Desde la mano]
+    - •1 vez por turno (HOPT)•
+    - «Solo puedes invocar de manera especial plantas»
   - (v2a): Negador de efecto de un monstruo del oponente
     - +mano+
     - +cementerio+
