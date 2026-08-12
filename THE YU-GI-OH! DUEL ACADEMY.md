@@ -34,6 +34,28 @@ Una vez definido el alcance, el resto de la información se expresa mediante el 
 
 Cuando exista un término de abstracción, éste debe dejar claramente definido el comportamiento restante de la mecánica.
 
+### Formato de encabezado (Estadísticas y Requerimientos)
+
+Para definir las propiedades fundamentales de una carta en un archivo de Discovery, se utiliza un formato estándar entre paréntesis al lado del nombre de la carta, seguido de los requisitos de invocación para el Extra Deck.
+
+#### Monstruos del Main Deck
+El formato base es: `(Nivel/Tipo/Clasificación/ATK/DEF)`
+Ejemplo: `(4/plant/effect/800/800)`
+
+#### Monstruos del Extra Deck
+Se incluye el método de invocación y, fuera del paréntesis principal, sus materiales.
+- **Synchro:** `(Nivel/Tipo/synchro/Clasificación/ATK/DEF) (Materiales)`
+  Ejemplo: `(8/dragon/synchro/effect/2500/2000) (1tuner+1noTuner)`
+- **Xyz:** `(Rango/Tipo/xyz/Clasificación/ATK/DEF) (Materiales)`
+  Ejemplo: `(4/plant/xyz/effect/2000/2000) (2lv4)`
+- **Link:** `(Link_Rating/Tipo/link/Clasificación/Flechas/ATK) (Materiales)`
+  Las flechas se representan por sus iniciales en inglés separadas por `|` (u: up, d: down, l: left, r: right, ul, ur, dl, dr).
+  Ejemplo: `(4/dragon/link/effect/l|r|dl|dr/3000) (3eff)`
+
+#### Magias y Trampas
+El formato es: `(spell/tipo)` o `(trap/tipo)`
+Ejemplo: `(spell/field)`, `(trap/continuous)`, `(trap/normal)`
+
 ### Restricciones de invocación
 
 Las **restricciones de invocación** representan propiedades estructurales de un monstruo que definen **cómo puede ingresar al Campo**.
@@ -81,13 +103,14 @@ Después del modo de invocación pueden declararse los requisitos propios de dic
 - **(v4) Conditional manual**: Cuando sucede el evento correspondiente, el efecto puede incorporarse a la siguiente cadena válida. El jugador puede decidir activarlo
 - **(v5) Manual**: El efecto no espera un evento disparador. El jugador lo activa voluntariamente durante una ventana legal
 ##### - Sintaxis de requerimientos:
-- **+Origen+**: Ubicación que debe ocupar la carta fuente para que la primitiva tenga potencial de acción. Se declara inmediatamente después de la descripción de la primitiva y antes de sus requisitos. Es obligatoria y constituye una dimensión espacial de la primitiva, no una condición (véase la sección detallada *Origen de las primitivas*).
-- **(acción de costo)**: accion nominal que se debe hacer ANTES de ejecutar el efecto. Esto es a fondo perdido 
-- **[condicion a cumplir]**: accion pasada o presente que se debe cumplir para permitir la ejecucion del efecto
-- **{obligación despues del cumplimiento del efecto}**: accion que debe realizarse DESPUES de la resolucion satisfactoria del efecto
-- **~tiempo de vida~**: Tiempo en el que un efecto de modificación de carta o comportamiento se aplica. Este se expresa en el texto de la carta o se asume sobre la mecánica 
-- **•frecuencia de activación•**: Intervalo explicito de cuantas veces se puede aplicar el efecto. Este se expresa en el texto de la carta 
-- **«restricción alterna»**: modificacion alternativa posterior del comportamiento del juego actual
+El orden de las etiquetas en una primitiva, si aplican, **debe seguir estrictamente** la siguiente secuencia:
+- **+Origen+**: Ubicación que debe ocupar la carta fuente para que la primitiva tenga potencial de acción. Se declara inmediatamente después de la descripción de la primitiva. Es obligatoria y constituye una dimensión espacial de la primitiva, no una condición (véase la sección detallada *Origen de las primitivas*).
+- **[condicion a cumplir]**: Accion pasada o presente que se debe cumplir para permitir la ejecucion del efecto.
+- **(acción de costo)**: Accion nominal que se debe hacer ANTES de ejecutar el efecto. Esto es a fondo perdido.
+- **{obligación despues del cumplimiento del efecto}**: Accion que debe realizarse DESPUES de la resolucion satisfactoria del efecto.
+- **•frecuencia de activación•**: Intervalo explicito de cuantas veces se puede aplicar el efecto. Este se expresa en el texto de la carta.
+- **~tiempo de vida~**: Tiempo en el que un efecto de modificación de carta o comportamiento se aplica. Este se expresa en el texto de la carta o se asume sobre la mecánica.
+- **«restricción alterna»**: Modificacion alternativa posterior del comportamiento del juego actual.
 
 ### Términos de abstracción:
 | Término             | Mecánica cerrada                                                        |
@@ -131,6 +154,7 @@ Su notación general es:
 * El origen pertenece individualmente a cada primitiva y no a la carta completa. Una misma carta puede contener primitivas con diferentes orígenes.
 * El origen describe exclusivamente la ubicación de la **carta fuente**. No representa la ubicación de cartas utilizadas como costo, objetivos, recursos, cartas afectadas ni destinos de una acción.
 * La existencia de una carta fuente en el origen correspondiente determina que la primitiva posea potencial de acción. Sus demás requisitos determinan posteriormente si dicho potencial puede ser habilitado o ejecutado.
+* Si una primitiva posee múltiples orígenes válidos desde los cuales puede operar (por ejemplo, desde la Mano o desde el Campo), estos se deben declarar como elementos separados en la misma lista y su relación lógica para habilitar el potencial de acción será siempre **OR**.
 
 #### Orígenes generales
 
