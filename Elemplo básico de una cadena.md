@@ -58,3 +58,28 @@ Cartas:
   -/CL2/-> C(v4): Special summon de esta carta: Success
   -/CL1/-> B(v3): Roba una carta: Success
 - #### Finalización
+
+## Plantilla base
+
+### - Evento generador
+  - Acción inicial que abrió una ventana válida para la activación de un efecto
+### - Apertura
+  - /CL1/ -> Acción inicial
+    - -ventana válida para la activación de algún otro efecto-
+### - Chain stack
+  - /CL2/ -> Efecto activado
+    - (costo aplicado)
+    - [condición cumplida para la activacion de este efecto]
+    - -ventana válida-
+  - /CLN/ ...
+    - ...
+    - -ventana válida-
+  - ...
+### - Fin de la incorporación de efectos
+### - Resolución
+  - /CL[N]/ -> Acciones de resolución del último efecto de la cadena: success/failed
+    - -ventana válida para la activación de algún otro efecto (este se resolverá fuera de esta cadena, y este se puede ejecutar si la ejecución de la acción fué success)-
+  - /CL[N-1]/ -> Acciones de resolución del efecto anterior: success/failed
+    - -ventana válida-
+  - ...
+  - /CL1/ -> Acciones del primer evento generador: success/failed
