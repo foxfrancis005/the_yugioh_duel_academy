@@ -4,43 +4,43 @@
 ### Deck Rikka
 
 - #### Petalo: 1
-  - (v4): Buscador de 1 monstruo Rikka de tu Deck a tu Mano o Enterrador de 1 monstruo Rikka de tu Deck a tu GY
+  - (v4): **Buscador** de 1 monstruo Rikka de tu Deck a tu Mano o Enterrador de 1 monstruo Rikka de tu Deck a tu GY
     - [Debe estar en campo face-up]
     - [Debes estar en tu main fase 1]
     - [El monstruo a buscar no debe ser Rikka petalo]
     - •1 vez por turno (HOPT)•
     - «Solo puedes hacer special de plantas por el resto del turno»
-  - (v4): Revividor de esta carta desde tu GY a tu Campo
+  - (v4): **Se autorrevive** esta carta desde tu GY a tu Campo
     - [Solo en End Phase del oponente]
     - [Debe estar en GY]
     - [No debes controlar monstruos o todos deben ser plantas]
     - •1 vez por turno (HOPT)•
 
 - #### Primula: 4
-  - (v4): Auto-summon de esta carta desde tu Mano a tu Campo en defensa
+  - (v4): **Auto-summon** de esta carta desde tu Mano a tu Campo en defensa
     - [Si un monstruo que controlas es tributado]
     - •1 vez por turno (HOPT)•
-  - (v5): Incrementador de 2 niveles a hasta 2 Plantas en tu Campo
+  - (v5): **Incrementador de 2 niveles** a hasta 2 Plantas en tu Campo
     - (Targetea hasta 2 plantas que controlas)
     - [Debe estar en campo face-up]
     - ~El efecto dura hasta el final del turno~
     - •1 vez por turno (HOPT)•
 
 - #### Cyclamen: 4
-  - (v5): Reductor de niveles de hasta dos Plantas en tu Campo por 2
+  - (v5): **Reductor de niveles** de hasta dos Plantas en tu Campo por 2
     - (Tributa esta carta desde mano o campo face-up)
     - (Targetea hasta 2 plantas que controlas)
     - [al menos una planta en tu campo]
     - ~Hasta el final del turno~
     - •1 vez por turno (HOPT)•
-  - (v4): Revividor de esta carta desde tu GY a tu Campo
+  - (v4): **Se autorrevive** esta carta desde tu GY a tu Campo
     - [Si está en GY por ser tributada y enviada ahí este turno]
     - [Durante la End Phase]
     - •1 vez por turno (HOPT)•
     - «Se destierra cuando deja el campo»
 
 - #### Princesa: 4
-  - (v5): Auto-summon de esta carta desde tu Mano a tu Campo
+  - (v5): **Auto-summon** de esta carta desde tu Mano a tu Campo
     - [Desde la mano]
     - •1 vez por turno (HOPT)•
     - «Solo puedes invocar de manera especial plantas»
