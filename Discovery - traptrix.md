@@ -28,5 +28,5 @@
   - (v2a): Rebotador de 1 Magia/Trampa seteada, y Seteador de 1 Magia/Trampa desde la Mano
     - +Campo+
     - (Targetea 1 Magia/Trampa seteada que controlas)
-    - {Puedes setear 1 Magia/Trampa desde tu Mano}
+    - {Obcional: setear 1 Magia/Trampa desde tu Mano}
     - •1 vez por turno (HOPT)•
