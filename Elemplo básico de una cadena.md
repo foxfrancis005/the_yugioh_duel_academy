@@ -78,8 +78,11 @@ Cartas:
 ### - Fin de la incorporación de efectos
 ### - Resolución
   - /CL[N]/ -> Acciones de resolución del último efecto de la cadena: success/failed
-    - -ventana válida para la activación de algún otro efecto (este se resolverá fuera de esta cadena, y este se puede ejecutar si la ejecución de la acción fué success)-
+    - -ventana válida para la activación de algún otro efecto (este se resolverá fuera de esta cadena, y este se puede ejecutar si la ejecución de la acción detonadora fue success)-
   - /CL[N-1]/ -> Acciones de resolución del efecto anterior: success/failed
     - -ventana válida-
   - ...
   - /CL1/ -> Acciones del primer evento generador: success/failed
+    - -ventana válida-
+### - Fin de la cadena
+  - La cadena deja de existir
