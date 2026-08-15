@@ -30,3 +30,178 @@
     - (Targetea 1 Magia/Trampa seteada que controlas)
     - {Obcional: setear 1 Magia/Trampa desde tu Mano}
     - •1 vez por turno (HOPT)•
+
+- ## Traptrix Atrax (4/insect/effect/1800/1000):
+  - (cf): Inmunidad a efectos de trampas "Hole"
+    - +Campo+
+  - (cf): Activador de trampas "Hole" desde la Mano
+    - +Campo+
+  - (cf): Protector de activaciones y efectos de Trampas Normales de tu lado del Campo
+    - +Campo+
+
+- ## Traptrix Dionaea (4/plant/effect/1700/1100):
+  - (cf): Inmunidad a efectos de trampas "Hole"
+    - +Campo+
+  - (v4): Revividor de 1 monstruo "Traptrix" en posición de defensa
+    - +Campo+
+    - [Cuando esta carta es Invocada de Modo Normal]
+    - (Targetea 1 monstruo "Traptrix" en tu GY)
+  - (v4): Seteador de 1 Trampa Normal "Hole" desde tu GY
+    - +Campo+
+    - [Cuando esta carta es Invocada de Modo Especial]
+    - (Targetea 1 Trampa Normal "Hole" en tu GY)
+    - {Se destierra durante la End Phase del próximo turno}
+    - •1 vez por turno (HOPT)•
+
+- ## Traptrix Genlisea (4/plant/effect/1200/1600):
+  - (cf): Inmunidad a efectos de trampas "Hole"
+    - +Campo+
+  - (v5): Seteador de 2 Trampas Normales "Hole" con nombres diferentes
+    - +Campo+
+    - (Tributador de esta carta)
+    - (1 desde tu Deck y 1 desde tu GY)
+    - {Se destierran cuando dejan el Campo}
+    - •1 vez por turno (HOPT)•
+
+- ## Traptrix Vesiculo (4/plant/effect/1400/1400):
+  - (cf): Inmunidad a efectos de trampas "Hole"
+    - +Campo+
+  - (v5): Auto-summon de esta carta
+    - +Mano+
+    - (Enviador al GY de 1 trampa seteada que controles)
+    - •1 vez por turno (HOPT)•
+  - (v5): Seteador de 1 trampa "Hole" desde tu GY
+    - +GY+
+    - [Si no controlas cartas en tu Zona de Magias y Trampas]
+    - (Desterrador de esta carta)
+    - (Targetea 1 Trampa "Hole" en tu GY)
+    - •1 vez por turno (HOPT)•
+
+- ## Traptrix Arachnocampa (4/insect/effect/1300/1500):
+  - (cf): Inmunidad a efectos de trampas "Hole"
+    - +Campo+
+  - (v2a): Auto-summon de esta carta
+    - +Mano+
+    - [Durante la Main Phase, si controlas un monstruo "Traptrix"]
+    - •1 vez por turno (HOPT)•
+    - «Solo puedes invocar de manera especial monstruos Insecto y Planta desde el Extra Deck por el resto del turno»
+  - (cf): Protector de destrucción por efectos para cartas seteadas en tu Zona de Magias y Trampas (la primera vez cada turno)
+    - +Campo+
+
+- ## Traptrix Pudica (4/plant/effect/900/1900):
+  - (cf): Inmunidad a efectos de trampas "Hole"
+    - +Campo+
+  - (v4): Buscador de "Traptrip Garden" desde el Deck
+    - +Campo+
+    - [Cuando esta carta es Invocada de Modo Normal]
+    - •1 vez por turno (HOPT)•
+  - (v4): Desterrador de 1 monstruo Invocado de Modo Especial del oponente
+    - +Campo+
+    - [Cuando esta carta es Invocada de Modo Especial]
+    - (Targetea 1 monstruo Invocado de Modo Especial del oponente)
+    - {Durante la próxima Standby Phase, el oponente puede invocar 1 de sus monstruos desterrados}
+    - •1 vez por turno (HOPT)•
+
+- ## Traptrix Sera (Link-1/plant/effect/800/0):
+  - (cf): Inmunidad a efectos de trampas
+    - +Campo+
+    - [Mientras haya sido Invocada por Enlace]
+  - (v4): Invocador Especial de 1 monstruo "Traptrix" desde tu Deck con nombre diferente a tus cartas
+    - +Campo+
+    - [Si activas una carta de Trampa Normal]
+    - •1 vez por turno (HOPT)•
+  - (v4): Seteador de 1 Trampa Normal "Hole" desde tu Deck
+    - +Campo+
+    - [Si el efecto de otro monstruo "Traptrix" tuyo es activado]
+    - •1 vez por turno (HOPT)•
+
+- ## Traptrix Cularia (Link-2/plant/effect/1800/0):
+  - (cf): Inmunidad a efectos de trampas
+    - +Campo+
+    - [Mientras haya sido Invocada por Enlace]
+  - (cf): Seteador de Trampa Normal "Hole" en lugar de enviarla al GY
+    - +Campo+
+    - [Después de que activas una Trampa Normal "Hole"]
+  - (v4): Revividor de 1 monstruo "Traptrix" en posición de defensa
+    - +Campo+
+    - [Durante tu End Phase]
+    - (Targetea 1 monstruo "Traptrix" en tu GY)
+    - •1 vez por turno (HOPT)•
+
+- ## Traptrix Atypus (Link-3/insect/effect/1800/0):
+  - (cf): Inmunidad a efectos de trampas
+    - +Campo+
+    - [Mientras haya sido Invocada por Enlace]
+  - (cf): Incrementador de ATK en 1000 a todos los monstruos "Traptrix"
+    - +Campo+
+    - [Mientras tengas una Trampa Normal en tu GY]
+  - (v5): Negador de efectos de cartas boca arriba del oponente hasta el final del turno, y Desterrador de Trampa para destruir
+    - +Campo+
+    - (Targetea cartas boca arriba del oponente, hasta el número de monstruos Insecto/Planta que controles)
+    - {Obcional: Desterrar 1 Trampa Normal del GY para destruir 1 de las cartas targeteadas}
+    - •1 vez por turno (HOPT)•
+
+- ## Traptrix Rafflesia (Xyz-4/plant/effect/300/2500):
+  - (cf): Inmunidad a efectos de trampas
+    - +Campo+
+    - [Mientras tenga material Xyz]
+  - (cf): Protector de destrucción y de targeteo para tus otros monstruos "Traptrix"
+    - +Campo+
+  - (v2a): Copiador de efecto de una Trampa Normal "Hole" desde el Deck
+    - +Campo+
+    - (Desacoplador de 1 material Xyz, y enviador al GY de 1 Trampa Normal "Hole" desde el Deck que cumpla sus condiciones)
+    - •1 vez por turno (HOPT)•
+
+- ## Traptrix Allomerus (Xyz-4/insect/effect/2200/600):
+  - (cf): Inmunidad a efectos de trampas
+    - +Campo+
+    - [Mientras tenga material Xyz]
+  - (v5): Revividor de 1 monstruo Insecto/Planta de Nivel 4
+    - +Campo+
+    - (Desacoplador de 2 materiales Xyz)
+    - (Targetea 1 monstruo Insecto/Planta de Nivel 4 en tu GY)
+    - •1 vez por turno (HOPT)•
+  - (v4): Robador/Revividor de 1 monstruo del oponente
+    - +Campo+
+    - [Si un monstruo del oponente deja el Campo por tu efecto de carta, y ahora está en el GY o desterrado]
+    - (Desacoplador de 1 material Xyz)
+    - (Targetea 1 de esos monstruos del oponente)
+    - •1 vez por turno (HOPT)•
+
+- ## Traptrix Pinguicula (Xyz-4/plant/effect/2500/300):
+  - (cf): Inmunidad a efectos de trampas y efectos de monstruos del mismo Tipo que sus materiales
+    - +Campo+
+    - [Mientras tenga material Xyz]
+  - (v5): Buscador de 1 monstruo "Traptrix"
+    - +Campo+
+    - (Desacoplador de 1 material Xyz)
+    - •1 vez por turno (HOPT)•
+  - (v4): Ladrón de 1 monstruo del oponente (como material Xyz)
+    - +Campo+
+    - [Si un monstruo del oponente es enviado al GY o desterrado por efecto de carta]
+    - (Acoplador de ese monstruo a esta carta)
+    - •1 vez por turno (HOPT)•
+
+- ## Traptrip Garden (spell/field):
+  - (cf): Invocador Normal Extra de 1 monstruo "Traptrix"
+    - +Campo+
+    - •1 vez por turno (HOPT)•
+  - (cf): Protector de destrucción por batalla para monstruos Insecto/Planta (la primera vez cada turno)
+    - +Campo+
+  - (v4): Revividor de 1 monstruo "Traptrix"
+    - +Campo+
+    - [Si un monstruo que controlas es desterrado]
+    - (Desterrador de 1 monstruo Insecto/Planta que controlas o de tu GY)
+    - •1 vez por turno (HOPT)•
+
+- ## Traptrix Holeutea (trap/normal):
+  - (v2a): Auto-summon de esta carta (como monstruo normal 4/plant/400/2400)
+    - +Campo+
+    - (Descartador de 1 Trampa Normal)
+    - {Puede activarse en el mismo turno en el que fue seteada descartando una Trampa Normal}
+    - •1 vez por turno (HOPT)•
+  - (v2a): Revividor de 1 monstruo "Traptrix"
+    - +GY+
+    - (Desterrador de esta carta)
+    - (Targetea 1 monstruo "Traptrix" en tu GY)
+    - •1 vez por turno (HOPT)•
