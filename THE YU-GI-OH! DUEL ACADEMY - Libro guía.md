@@ -102,6 +102,7 @@ Después del modo de invocación pueden declararse los requisitos propios de dic
 - **(v3) Conditional auto**: Cuando sucede el evento correspondiente, el efecto debe incorporarse a la siguiente cadena válida. El jugador no decide si activarlo
 - **(v4) Conditional manual**: Cuando sucede el evento correspondiente, el efecto puede incorporarse a la siguiente cadena válida. El jugador puede decidir activarlo
 - **(v5) Manual**: El efecto no espera un evento disparador. El jugador lo activa voluntariamente durante una ventana legal
+
 ##### - Sintaxis de requerimientos:
 El orden de las etiquetas en una primitiva, si aplican, **debe seguir estrictamente** la siguiente secuencia:
 - **+Origen+**: Ubicación que debe ocupar la carta fuente para que la primitiva tenga potencial de acción. Se declara inmediatamente después de la descripción de la primitiva. Es obligatoria y constituye una dimensión espacial de la primitiva, no una condición (véase la sección detallada *Origen de las primitivas*).
